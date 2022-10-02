@@ -1,0 +1,45 @@
+{{val1}}
+///////////////////
+{{var2}}
+/////////////////////
+{% set v='test' %}
+//////////////////////
+{% set tab={"fname":"foulen","lname":"benfoulen"} %}
+{{tab['fname']}}
+{% for element in tab %}
+{{element}}
+{% endfor %}
+////////////////////
+{{v}}
+///////////////////////
+<table border="1">
+<tr>
+<th>Id</th>
+<th>Email</th>
+</tr>
+{% for p in persons %}
+<tr>
+<td>{{ p.id }}</td>
+<td>{{ p.email|upper }}</td>
+</tr>
+{% endfor %}
+</table>
+/////////////////////////
+{% if persons is empty %}
+Pas d'elements
+{% else %}
+{{persons|length}}
+{% endif %}
+//////////////////////////////
+{% if 5 not in [1,2,3] %}
+5 not present
+{% endif %}
+///////////////////////////
+{% apply upper %}
+Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+{% endapply %}
+/////////////
+{{ dump(persons) }}
+/////////
+<a href="{{path('app_teacher')}}">Go to Teacher</a>
+<a href="{{path('app_teacher_show',{'name':val1,'lastname':tab['fname']})}}">Go to Teacher</a>

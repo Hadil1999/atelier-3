@@ -1,0 +1,137 @@
+<h3>2. affichage de la liste des formations.  </h3>
+<table border="1">
+<tr>
+  <th>Ref</th>
+  <th>Titre</th>
+  <th>Description</th>
+  <th>date_debut</th>
+  <th>date_fin</th> 
+  <th>nb_participants</th> 
+</tr>
+{% for f in formations %}
+<tr>
+    <td>{{ f.ref }}</td>
+    <td>{{ f.Titre|upper }}</td>
+    <td>{{ f.Description }}</td>
+    <td>{{ f.date_debut}}</td>   
+    <td>{{ f.date_fin}}</td>
+    <td>{{ f.nb_participants}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>3. Afficher les titres des formations en majuscule   </h3>
+<table border="1">
+<tr>
+  <th>Ref</th>
+  <th>Titre</th>
+  <th>Description</th>
+  <th>date_debut</th>
+  <th>date_fin</th> 
+  <th>nb_participants</th> 
+</tr>
+{% for f in formations %}
+<tr>
+    <td>{{ f.ref }}</td>
+    <td>{{ f.Titre|upper }}</td>
+    <td>{{ f.Description }}</td>
+    <td>{{ f.date_debut}}</td>
+    <td>{{ f.date_fin}}</td>
+    <td>{{ f.nb_participants}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>4:le nombre de formations est </h3>
+{{formations|length}}
+
+<br/>
+<h3>5. Afficher les titres des formations théoriques. </h3>
+{% set ch = 'formation theorique' %}     
+  {% for f in formations %}
+    {% if f.Description == ch %}
+    Titre : {{f.Titre}}/
+       
+    {% endif %}
+  {% endfor %}
+
+<br/>
+<h3>6. Afficher le titre de la formation ayant le plus grand nombre de participants.   </h3>
+  {% set nbMax = formations[0].nb_participants %}  
+  {% set ref = formations[0].ref %}  
+  {% for f in formations %}
+       {% if f.nb_participants >=  nbMax %}
+            {% set nbMax = f.nb_participants %}
+            {% set ref = f.ref %} 
+       {% endif %}
+  {% endfor %}
+
+
+ 
+  <table border="1">
+  <tr>
+    <th> Ref</th>
+    <th>Titre</th>
+    <th>Description</th>
+    <th>date_debut</th>
+    <th>date_fin</th> 
+    <th>nb_participants</th> 
+  </tr>
+  {% for f in formations %}
+    {% if f.ref == ref %}
+       <tr>
+         <td> {{f.ref}}</td>
+         <td> {{f.Titre}}</td>
+         <td> {{f.Description}}</td>
+         <td>{{f.date_debut}}</td>
+         <td>{{f.date_fin}}</td>
+         <td>{{f.nb_participants}}</td>
+        </tr>
+    {% endif %}
+  {% endfor %}
+</table>
+
+<br/>
+<h3>7. Afficher le nombre total de participants dans toutes les formations.   </h3>
+    {% set nbP = 0 %}  
+    {% for f in formations %}
+         {% set nbP = nbP + f.nb_participants %}
+    {% endfor %}
+    le nombre total est {{nbP}}
+
+<br/>
+<h3>8. Ajouter une condition dans le cas où le tableau n’est pas défini et/ou vide.</h3>
+
+   {% if formations is empty %}
+        Pas d'elements
+   {% endif %}
+
+<br/>
+<h3> 9. Ajouter un bouton, participer, devant la formation ayant aucun participant.</h3>
+<table border="1">
+  <tr>
+    <th> Ref</th>
+    <th>Titre</th>
+    <th>Description</th>
+    <th>date_debut</th>
+    <th>date_fin</th> 
+    <th>nb_participants</th> 
+   
+  </tr>
+  {% for f in formations %}
+    <tr>
+      <td> {{f.ref}}</td>
+      <td> {{f.Titre}}</td>
+      <td> {{f.Description}}</td>
+      <td>{{f.date_debut}}</td>
+      <td>{{f.date_fin}}</td>
+      {% if f.nb_participants == 0 %}
+        <td><a href="{{ path('club/formation', {'titre': f.Titre}) }}"> <input type="button" value="Participer" /></a><td>
+      {% else %}
+          <td>{{f.nb_participants}}</td>
+      {% endif %}
+    </tr>
+ {% endfor %}
+</table>
+
+<br/>
