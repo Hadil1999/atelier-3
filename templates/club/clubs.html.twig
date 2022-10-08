@@ -1,0 +1,22 @@
+<h1>Liste des clubs</h1>
+<table border="1">
+<tr>
+  <th>Id</th>
+  <th>name</th>
+  <th>Creation Date</th>
+  <th colspan="6">Actions</th>
+  
+
+</tr>
+{% for c in clubs %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.name|upper }}</td>
+    <td>{{ c.creationDate|date }}</td>
+    <td><a href="{{ path('club_get_by_id', {'id': c.id}) }}"> <input type="button" value="detail" /></a><td>
+    <td><a href="{{ path('club_remove', {'id': c.id}) }}"> <input type="button" value="supprimer" /></a><td>
+    <td><a href="{{ path('club_edit', {'id': c.id}) }}"> <input type="button" value="modifier" /></a><td>
+
+</tr>
+{% endfor %}
+</table>

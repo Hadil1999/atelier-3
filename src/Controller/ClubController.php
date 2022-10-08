@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Controller;
-
+use App\Form\ClubType;
+use App\Entity\Club;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Repository\ClubRepository;
+use Doctrine\Persistence\ManagerRegistry;
 class ClubController extends AbstractController
 {
     #[Route('/club', name: 'app_club')]
@@ -46,4 +49,67 @@ class ClubController extends AbstractController
             'titre'=> $titre
         ]);
     }
+    #[Route('club/all', name:'club_get_all')]
+    public function getClubs(ClubRepository $repo):Response{
+        $clubs=$repo->findAll();
+        return $this->render('club/clubs.html.twig', [
+            'clubs'=> $clubs
+        ]);
+    }
+    #[Route('club/{id}', name:'club_get_by_id')]
+    public function getClub(ClubRepository $repo,$id):Response{
+        $club=$repo->find($id);
+        return $this->render('club/detailsClub.html.twig', [
+            'club'=> $club
+        ]);
+    }
+    #[Route('removeClub/{id}', name:'club_remove')]
+    public function removeClub(ManagerRegistry $doctrine,$id):Response{
+
+        $em=$doctrine->getManager();
+        $repo=$doctrine->getRepository(club::class);
+        $club=$repo->find($id);
+        $em->remove($club);
+        $em->flush();
+        return $this->redirectToRoute('club_get_all');
+    
+    }
+    #[Route('addClub/', name:'club_add')]
+    public function new(Request $request,ManagerRegistry $doctrine): Response
+    {
+       
+           $club = new Club();
+           $form = $this->createForm(ClubType::class,$club);
+           $form->handleRequest($request);
+           if($form->isSubmitted() && $form->isValid()) {
+           $club = $form->getData();
+
+           $entityManager = $doctrine->getManager();
+           $repo=$doctrine->getRepository(club::class);
+            $entityManager->persist($club);
+            $entityManager->flush();
+            return $this->redirectToRoute('club_get_all');
+           } 
+           return $this->render('club/addClub.html.twig',['form' => $form->createView()]);
+    }
+    #[Route('editClub/{id}', name:'club_edit')]
+    public function edit(Request $request,ManagerRegistry $doctrine ,$id) {
+        $club = new club();
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+       
+        $form = $this->createForm(ClubType::class,$club);
+       
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+       
+        $entityManager = $doctrine->getManager();
+        $entityManager->flush();
+       
+        return $this->redirectToRoute('club_get_all');
+        }
+       
+        return $this->render('club/editClub.html.twig', ['form' =>
+       $form->createView()]);
+        }
+       
 }
