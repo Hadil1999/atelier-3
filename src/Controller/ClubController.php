@@ -82,15 +82,15 @@ class ClubController extends AbstractController
            $form = $this->createForm(ClubType::class,$club);
            $form->handleRequest($request);
            if($form->isSubmitted() && $form->isValid()) {
-           $club = $form->getData();
-
-           $entityManager = $doctrine->getManager();
-           $repo=$doctrine->getRepository(club::class);
+            $club = $form->getData();
+            $entityManager = $doctrine->getManager();
+            $repo=$doctrine->getRepository(club::class);
             $entityManager->persist($club);
             $entityManager->flush();
             return $this->redirectToRoute('club_get_all');
            } 
-           return $this->render('club/addClub.html.twig',['form' => $form->createView()]);
+           //return $this->render('club/addClub.html.twig',['form' => $form->createView()]);
+           return $this->renderForm('club/addClub.html.twig',['form' => $form]);
     }
     #[Route('editClub/{id}', name:'club_edit')]
     public function edit(Request $request,ManagerRegistry $doctrine ,$id) {

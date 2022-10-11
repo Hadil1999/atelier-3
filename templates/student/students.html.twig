@@ -1,4 +1,4 @@
-<h1>Liste des Etudiants</h1>
+<h1>List of students</h1>
 <table border="1">
 <tr>
   <th>NSC</th>
@@ -16,8 +16,8 @@
     <td>{{ s.email }}</td>
     <td>{{ s.birthDate|date }}</td>
     <td><a href="{{ path('student_get_by_nsc', {'nsc': s.nsc}) }}"> <input type="button" value="detail" /></a><td>
-     <td><a href="{{ path('student_remove', {'nsc': s.nsc}) }}"> <input type="button" value="supprimer" /></a><td>
-    <td><a href="{{ path('student_edit', {'nsc': s.nsc}) }}"> <input type="button" value="modifier" /></a><td>
+     <td><a href="{{ path('student_remove', {'nsc': s.nsc}) }}"> <input type="button" value="remove" /></a><td>
+    <td><a href="{{ path('student_edit', {'nsc': s.nsc}) }}"> <input type="button" value="update" /></a><td>
 
 </tr>
 {% endfor %}

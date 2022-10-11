@@ -1,0 +1,20 @@
+<h1>List of classrooms</h1>
+<table border="1">
+<tr>
+  <th>Id</th>
+  <th>name</th>
+  <th colspan="6">Actions</th>
+  
+
+</tr>
+{% for c in classrooms %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.name|upper }}</td>
+    <td><a href="{{ path('classroom_get_by_id', {'id': c.id}) }}"> <input type="button" value="detail" /></a><td>
+    <td><a href="{{ path('classroom_remove', {'id': c.id}) }}"> <input type="button" value="remove" /></a><td>
+    <td><a href="{{ path('classroom_edit', {'id': c.id}) }}"> <input type="button" value="update" /></a><td>
+
+</tr>
+{% endfor %}
+</table>

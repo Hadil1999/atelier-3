@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}nouveau edutiant{% endblock %}
+{% block title %}add student{% endblock %}
 
 {% block body %}
-    <h1>ajouter etudiant</h1>
+    <h1>add student</h1>
     <div class="col-md-4">
        {{ form_start(form) }}
        {{ form_widget(form) }}
     </div>
- <button type="submit" class="btn btn-success">Créer</button>
+ <button type="submit" class="btn btn-success">add</button>
 {{ form_end(form) }}
 {% endblock %}

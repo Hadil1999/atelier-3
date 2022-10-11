@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}modifier etudiant{% endblock %}
+{% block title %}edit student{% endblock %}
 
 {% block body %}
-    <h1>modifier etudiant</h1>
+    <h1>edit student</h1>
     <div class="col-md-4">
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button type="submit" class="btn btn-success">Modifier</button>
+    <button type="submit" class="btn btn-success">update</button>
     {{ form_end(form) }}
       
 {% endblock %}

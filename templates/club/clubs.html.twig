@@ -14,8 +14,8 @@
     <td>{{ c.name|upper }}</td>
     <td>{{ c.creationDate|date }}</td>
     <td><a href="{{ path('club_get_by_id', {'id': c.id}) }}"> <input type="button" value="detail" /></a><td>
-    <td><a href="{{ path('club_remove', {'id': c.id}) }}"> <input type="button" value="supprimer" /></a><td>
-    <td><a href="{{ path('club_edit', {'id': c.id}) }}"> <input type="button" value="modifier" /></a><td>
+    <td><a href="{{ path('club_remove', {'id': c.id}) }}"> <input type="button" value="remove" /></a><td>
+    <td><a href="{{ path('club_edit', {'id': c.id}) }}"> <input type="button" value="update" /></a><td>
 
 </tr>
 {% endfor %}
