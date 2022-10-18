@@ -5,6 +5,7 @@
   <th>name</th>
   <th>email</th>
   <th>birth Date</th>
+  <th>classroom</th>
   <th colspan="6">Actions</th>
   
 
@@ -15,6 +16,7 @@
     <td>{{ s.name|upper }}</td>
     <td>{{ s.email }}</td>
     <td>{{ s.birthDate|date }}</td>
+    <td>{{ s.idClassroom.name }}</td>
     <td><a href="{{ path('student_get_by_nsc', {'nsc': s.nsc}) }}"> <input type="button" value="detail" /></a><td>
      <td><a href="{{ path('student_remove', {'nsc': s.nsc}) }}"> <input type="button" value="remove" /></a><td>
     <td><a href="{{ path('student_edit', {'nsc': s.nsc}) }}"> <input type="button" value="update" /></a><td>

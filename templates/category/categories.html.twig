@@ -1,0 +1,25 @@
+<h1>List of categories</h1>
+<table border="1">
+<tr>
+  <th>Id</th>
+  <th>label</th>
+  <th>products</th>
+  <th colspan="6">Actions</th>
+  
+
+</tr>
+{% for c in categories %}
+<tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.label|upper }}</td>
+    <td>
+    <ul>
+    {% for p in c.products %}
+    <li>{{ p.label }}</li>
+    {% endfor %}
+    </ul></td>
+    <td><a href="{{ path('category_remove', {'id': c.id}) }}"> <input type="button" value="remove" /></a><td>
+
+</tr>
+{% endfor %}
+</table>

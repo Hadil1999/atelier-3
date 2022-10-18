@@ -3,6 +3,7 @@
 <tr>
   <th>Id</th>
   <th>name</th>
+  <th>students</th>
   <th colspan="6">Actions</th>
   
 
@@ -11,6 +12,12 @@
 <tr>
     <td>{{ c.id }}</td>
     <td>{{ c.name|upper }}</td>
+    <td>
+    <ul>
+    {% for s in c.students %}
+    <li>{{ s.name }}</li>
+    {% endfor %}
+    </ul></td>
     <td><a href="{{ path('classroom_get_by_id', {'id': c.id}) }}"> <input type="button" value="detail" /></a><td>
     <td><a href="{{ path('classroom_remove', {'id': c.id}) }}"> <input type="button" value="remove" /></a><td>
     <td><a href="{{ path('classroom_edit', {'id': c.id}) }}"> <input type="button" value="update" /></a><td>

@@ -1,0 +1,25 @@
+<h1>List of products</h1>
+<table border="1">
+<tr>
+  <th>id</th>
+  <th>label</th>
+  <th>price</th>
+  <th>quantity</th>
+  <th>category</th>
+  <th >Actions</th>
+  
+
+</tr>
+<tr>number of products :{{products|length}}</tr>
+{% for p in products %}
+<tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.label|upper }}</td>
+    <td>{{ p.price }}</td>
+    <td>{{ p.quantity}}</td>
+    <td>{{ p.idCategory.label }}</td>
+    <td><a href="{{ path('product_remove', {'id': p.id}) }}"> <input type="button" value="remove" /></a><td>
+
+</tr>
+{% endfor %}
+</table>
