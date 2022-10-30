@@ -1,5 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+        <a class="btn btn-success" href="{{path('club_add')}}">Add new club</a>
+
+</div>
+</div>
+<br>
+<br>
+<div class="row">
 <h1>Liste des clubs</h1>
-<table border="1">
+    <table class="table table-striped" >
 <tr>
   <th>Id</th>
   <th>name</th>
@@ -13,10 +30,11 @@
     <td>{{ c.id }}</td>
     <td>{{ c.name|upper }}</td>
     <td>{{ c.creationDate|date }}</td>
-    <td><a href="{{ path('club_get_by_id', {'id': c.id}) }}"> <input type="button" value="detail" /></a><td>
-    <td><a href="{{ path('club_remove', {'id': c.id}) }}"> <input type="button" value="remove" /></a><td>
-    <td><a href="{{ path('club_edit', {'id': c.id}) }}"> <input type="button" value="update" /></a><td>
+    <td><a href="{{ path('club_get_by_id', {'id': c.id}) }}"> <input type="button" class="btn btn-info"value="detail" /></a><td>
+    <td><a href="{{ path('club_remove', {'id': c.id}) }}"> <input type="button" class="btn btn-danger"value="remove" /></a><td>
+    <td><a href="{{ path('club_edit', {'id': c.id}) }}"> <input type="button" class="btn btn-warning"value="update" /></a><td>
 
 </tr>
 {% endfor %}
 </table>
+{% endblock %}

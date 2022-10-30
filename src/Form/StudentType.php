@@ -16,6 +16,7 @@ class StudentType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('birthDate')
+            ->add('moyenne')
             ->add('idClassroom',EntityType::class,
             ['class'=>Classroom::class,
             'choice_label'=>'name'])

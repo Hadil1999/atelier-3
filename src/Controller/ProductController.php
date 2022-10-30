@@ -27,7 +27,7 @@ class ProductController extends AbstractController
             'products'=> $products
         ]);
     }
-    #[Route('addProduct/', name:'Product_add')]
+    #[Route('addProduct/', name:'product_add')]
     public function new(Request $request,ManagerRegistry $doctrine): Response
     {
        

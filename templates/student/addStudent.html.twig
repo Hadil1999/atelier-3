@@ -1,13 +1,36 @@
+
 {% extends 'base.html.twig' %}
-
-{% block title %}add student{% endblock %}
-
 {% block body %}
-    <h1>add student</h1>
-    <div class="col-md-4">
-       {{ form_start(form) }}
-       {{ form_widget(form) }}
-    </div>
+<div class="container">
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-4">
+{{form_start(form)}}
+<div class="mb-3">
+{{form_label(form.name,'User Name : ',{'attr':{'class':'form-label'}})}}
+{{form_widget(form.name,{'attr':{'class':'form-control'}})}}
+</div>
+<div class="mb-3">
+{{form_label(form.email,'Email : ',{'attr':{'class':'form-label'}})}}
+{{form_widget(form.email,{'attr':{'class':'form-control'}})}}
+</div>
+<div class="mb-3">
+{{form_label(form.birthDate,'birthDate : ',{'attr':{'class':'form-label'}})}}
+{{form_widget(form.birthDate,{'attr':{'class':'form-control'}})}}
+</div>
+<div class="mb-3">
+{{form_label(form.idClassroom,'Nsc : ',{'attr':{'class':'form-label'}})}}
+{{form_widget(form.idClassroom,{'attr':{'class':'form-select'}})}}
+</div>
+<div class="mb-3">
+{{form_label(form.moyenne,'Moyenne : ',{'attr':{'class':'form-label'}})}}
+{{form_widget(form.moyenne,{'attr':{'class':'form-select'}})}}
+</div>
+<div class="mb-3">
  <button type="submit" class="btn btn-success">add</button>
-{{ form_end(form) }}
+</div>
+{{form_end(form)}}
+</div>
+</div>
+</div>
 {% endblock %}

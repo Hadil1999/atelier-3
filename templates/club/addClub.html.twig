@@ -1,6 +1,7 @@
-{# {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
+{% block body %}
 
-{% block title %}nouveau club{% endblock %}
+{# {% block title %}nouveau club{% endblock %}
 
 {% block body %}
     <h1>ajouter club</h1>
@@ -10,6 +11,7 @@
     </div>
  <button type="submit" class="btn btn-success">Créer</button>
 {{ form_end(form) }}
-{% endblock %} #}
+{% endblock %} #} 
 <h1>add club</h1>
 {{form(form)}}
+{% endblock %}

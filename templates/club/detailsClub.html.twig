@@ -1,6 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
 <ul>
 <li>id:{{club.id}}</li>
 <li>name:{{club.name}}</li>
 <li>creation date:{{club.creationDate|date}}</li>
 
 </ul>
+{% endblock %}

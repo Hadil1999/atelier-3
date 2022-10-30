@@ -75,6 +75,20 @@ use Doctrine\Persistence\ManagerRegistry;
         return $this->render('student/editStudent.html.twig', ['form' =>
        $form->createView()]);
         }
-       
+        #[Route('student/order/orderedbyemail', name:'student_orderedbyemail')]
+        public function getStudentOrderedByEmail(StudentRepository $repo):Response{
+                    $students=$repo->getStudentOrderedByEmail();
+                    return $this->render('student/listbyemail.html.twig', [
+                        'students'=> $students
+                    ]);
+        }  
+        #[Route('student/moyenne/notAdmitted', name:'student_notAdmitted')]
+        public function getStudentsNotAdmitted(StudentRepository $repo){
+                    $students=$repo->getStudentsNotAdmitted();
+                    return $this->render('student/notAdmittedStudents.html.twig', [
+                        'students'=> $students
+                    ]);
+        }  
+           
   }
 ?>
