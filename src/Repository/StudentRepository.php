@@ -55,13 +55,27 @@ class StudentRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
-    public function getStudentByClass($id):array{
+    public function searchBy($filtre) : array {
         return $this->createQueryBuilder('s')
-        ->join('s.idClassroom','c')
-        ->Where('c.id=:id')
-        ->setParameter('id',$id)
-        ->getQuery()
-        ->getResult();
+                ->where('s.nsc LIKE ?1')
+                ->orWhere('s.email LIKE ?2')
+                ->orWhere('s.name LIKE ?3')
+                ->setParameter('1',$filtre)
+                ->setParameter('2',$filtre)
+                ->setParameter('3',$filtre)
+
+                ->getQuery()
+                ->getResult();
+
+    }
+
+    public function getStudentByClass($id) : array {
+        return $this->createQueryBuilder('s')
+                ->join('s.idClassroom','c')
+                ->where('c.id = :id')
+                ->setParameter('id',$id)
+                ->getQuery()
+                ->getResult();
     }
     function getStudentsNotAdmitted() : array {
         $em = $this->getEntityManager();
@@ -69,6 +83,14 @@ class StudentRepository extends ServiceEntityRepository
         return $query->getResult();
     
     }
+    function searchStudent($nsc) :array {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT s FROM APP\Entity\Student s WHERE s.nsc LIKE :nsc');
+        $query->setParameter('nsc',$nsc);
+        return $query->getResult();
+    }
+
+    
 
 //    /**
 //     * @return Student[] Returns an array of Student objects

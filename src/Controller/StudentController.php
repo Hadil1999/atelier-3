@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Entity\Student;
 use App\Form\StudentType;
+use App\Form\SearchNscType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,13 +83,54 @@ use Doctrine\Persistence\ManagerRegistry;
                         'students'=> $students
                     ]);
         }  
+       
+    
+        #[Route('student/byClass/{id}', name: 'student_byclass')]
+        public function getStudentByClass(StudentRepository $repo,$id) : Response {
+            $students = $repo->getStudentByClass($id);
+            return $this->render('student/byclass.html.twig',[
+                'students' => $students
+            ]);
+        }
         #[Route('student/moyenne/notAdmitted', name:'student_notAdmitted')]
         public function getStudentsNotAdmitted(StudentRepository $repo){
                     $students=$repo->getStudentsNotAdmitted();
                     return $this->render('student/notAdmittedStudents.html.twig', [
                         'students'=> $students
                     ]);
-        }  
+        } 
+    #[Route('student/search/fetch', name: 'student_fetch')]
+    public function fetch(ManagerRegistry $doctrine,Request $req): Response
+    {
+        $students= $doctrine->getRepository(Student::class)->findAll();
+        $studentsOrdredByEmail= $doctrine->getRepository(Student::class)->getStudentOrderedByEmail();
+        $studentsNA= $doctrine->getRepository(Student::class)->getStudentsNotAdmitted();
+
+        $form = $this->createForm(SearchNscType::class);
+        $form->handleRequest($req);
+        if($form->isSubmitted()){
+            $filtre = $form['filtre']->getData();
+            $studentsSearch = $doctrine->getRepository(Student::class)->searchBy($filtre);
+            return $this->renderForm('student/students.html.twig', [
+                'students' => $studentsSearch,
+                'studentsOE' => $studentsOrdredByEmail,
+                'studentsNA' => $studentsNA,
+
+                'form'=>$form
+    
+                
+            ]);
+        }
+        return $this->renderForm('student/students.html.twig', [
+            'students' => $students,
+            'studentsOE' => $studentsOrdredByEmail,
+            'studentsNA' => $studentsNA,
+
+            'form'=>$form
+
+            
+        ]);
+    }
            
   }
 ?>

@@ -8,6 +8,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-6">
+
         <a class="btn btn-success" href="{{path('classroom_add')}}">Add new classroom</a>
 
 </div>
@@ -21,7 +22,7 @@
   <th>Id</th>
   <th>name</th>
   <th>students</th>
-  <th colspan="6">Actions</th>
+  <th colspan="8">Actions</th>
   
 
 </tr>
@@ -35,6 +36,7 @@
     <li>{{ s.name }}</li>
     {% endfor %}
     </ul></td>
+    <td><a href="{{path('student_byclass',{'id':c.id})}}"><input type="button" class="btn btn-dark"value="students list" /></a></td> 
     <td><a href="{{ path('classroom_get_by_id', {'id': c.id}) }}"> <input type="button" class="btn btn-info"value="detail" /></a><td>
     <td><a href="{{ path('classroom_remove', {'id': c.id}) }}"> <input type="button"class="btn btn-danger" value="remove" /></a><td>
     <td><a href="{{ path('classroom_edit', {'id': c.id}) }}"> <input type="button"class="btn btn-warning" value="update" /></a><td>
